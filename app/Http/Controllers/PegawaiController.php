@@ -15,4 +15,24 @@ class PegawaiController extends Controller
     	// mengirim data pegawai ke view index
     	return view('index',['pegawai' => $pegawai]);
     }
+
+    public function tambah()
+    {
+        //memanggil view tambah
+        return view('tambah');
+    }
+
+    public function store(Request $request)
+    {
+        // insert data ke table pegawai
+        DB::table('pegawai')->insert([
+            'pegawai_nama' => $request->nama,
+            'pegawai_jabatan' => $request->jabatan,
+            'pegawai_umur' => $request->umur,
+            'pegawai_alamat' => $request->alamat
+        ]);
+        // alihkan halaman ke halaman pegawai
+        return redirect('/pegawai');
+ 
+    }
 }
