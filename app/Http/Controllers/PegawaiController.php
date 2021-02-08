@@ -24,6 +24,14 @@ class PegawaiController extends Controller
 
     public function store(Request $request)
     {
+
+        $this->validate($request, [
+            'nama' => 'required|min:5|max:20',
+            'jabatan' => 'required',
+            'umur' => 'required|numeric',
+            'alamat' => 'required'
+        ]);
+
         // insert data ke table pegawai
         DB::table('pegawai')->insert([
             'pegawai_nama' => $request->nama,
@@ -32,8 +40,7 @@ class PegawaiController extends Controller
             'pegawai_alamat' => $request->alamat
         ]);
         // alihkan halaman ke halaman pegawai
-        return redirect('/pegawai');
- 
+        return redirect('/pegawai'); 
     }
 
     public function edit($id)
@@ -46,6 +53,14 @@ class PegawaiController extends Controller
 
     public function update(Request $request)
     {
+
+        $this->validate($request, [
+            'nama' => 'required|min:5|max:20',
+            'jabatan' => 'required',
+            'umur' => 'required|numeric',
+            'alamat' => 'required'
+        ]);
+
         // update data pegawai
         DB::table('pegawai')->where('pegawai_id',$request->id)->update([
             'pegawai_nama' => $request->nama,
